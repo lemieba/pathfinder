@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <link rel="stylesheet" href="node.css">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root" ></div>
+    <script type="text/babel">
+
+      const createNode = (row, col) =>{
+        return {
+          row: row,
+          col: col
+        };
+      };
+      const createGrid = () => {
+        const grid = []
+        for (var row = 0; row < 20; row++){
+          const rowlist = []
+          for (var col = 0; col < 37; col++) {
+            rowlist.push(createNode(row, col));
+          }
+          grid.push(rowlist);
+        }
+        return grid;
+      };
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {date: new Date()};
+        }
+        componentDidMount() {}
+        componentWillUnmount() {}
+        render() {
+          return (
+            <div>
+              <h1>Hello, world!</h1>
+              <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+          );
+        }
+      }
+
+      class Node extends React.Component {
+        constructor(props) {
+          super(props);
+          this.row = props.row;
+          this.col = props.col;
+        }
+        render() {
+          return (
+            <div className="node"></div>
+          );
+        }
+      }
+
+      class Pathfinder extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            grid : [],
+            date: new Date()
+          };
+        }
+
+        componentDidMount() {
+          const grid = createGrid();
+          this.setState({grid});
+        }
+
+        render() {
+          return (
+            <div className="grid">
+              {this.state.grid.map((row) => {
+                return (<div className="">
+                  {row.map((node) => {
+                    return (<Node row={node.row} col={node.col} />);
+                  })}
+                </div>);
+              })}
+            </div>
+          );
+        }
+      }
+
+
+      ReactDOM.render(
+        <Pathfinder />,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
