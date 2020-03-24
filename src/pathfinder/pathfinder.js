@@ -74,12 +74,9 @@ export default class Pathfinder extends React.Component {
     render() {
       return (
         <>
-          <button onClick={() => this.visualizeDijkstra()}>
-            Visualize Dijkstras Algorithm
-          </button>
           <div className="grid">
             {this.state.grid.map((row, rowIdx) => {
-              return (<div className="" key={rowIdx}>
+              return (<div className="row" key={rowIdx}>
                 {row.map((node, nodeIdx) => {
                   return (
                     <Node
@@ -100,6 +97,9 @@ export default class Pathfinder extends React.Component {
               </div>);
             })}
           </div>
+          <button onClick={() => this.visualizeDijkstra()}>
+            Visualize Dijkstras Algorithm
+          </button>
         </>
       );
     }
@@ -122,25 +122,25 @@ const createNode = (row, col) =>{
     previousNode: null,
   };
 };
-  const createGrid = () => {
-    const grid = []
-    for (var row = 0; row < 20; row++){
-      const rowlist = []
-      for (var col = 0; col < 37; col++) {
-        rowlist.push(createNode(row, col));
-      }
-      grid.push(rowlist);
+const createGrid = () => {
+  const grid = []
+  for (var row = 0; row < 20; row++){
+    const rowlist = []
+    for (var col = 0; col < 37; col++) {
+      rowlist.push(createNode(row, col));
     }
-    return grid;
-  };
-
-  const getNewGridWithWallToggled = (grid, row, col) => {
-    const newGrid = grid.slice();
-    const node = newGrid[row][col];
-    const newNode = {
-      ...node,
-      isWall: !node.isWall,
-    };
-    newGrid[row][col] = newNode;
-    return newGrid;
+    grid.push(rowlist);
   }
+  return grid;
+};
+
+const getNewGridWithWallToggled = (grid, row, col) => {
+  const newGrid = grid.slice();
+  const node = newGrid[row][col];
+  const newNode = {
+    ...node,
+    isWall: !node.isWall,
+  };
+  newGrid[row][col] = newNode;
+  return newGrid;
+}

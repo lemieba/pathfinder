@@ -14,15 +14,15 @@ code {
 .node {
   width: 25px;
   height: 25px;
-  outline: 1px solid rgb(0, 0, 0);
+  outline: 1px solid rgb(165, 162, 162);
   display: inline-block;
 }
 .node-finish {
-  background-color: red;
+  background-color: rgb(128, 13, 9);
 }
 
 .node-start {
-  background-color: green;
+  background-color: rgb(43, 27, 136);
 }
 
 .node-visited {
@@ -88,4 +88,7 @@ code {
     transform: scale(1);
     background-color: rgb(255, 254, 106);
   }
+}
+.row {
+  height: 25px;
 }
